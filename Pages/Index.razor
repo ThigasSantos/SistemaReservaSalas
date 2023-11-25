@@ -1,0 +1,79 @@
+﻿@page "/"
+@inject SalaServices service
+@inject IJSRuntime JsRuntime
+@inject NavigationManager navigationManager
+@inject StateContainer stateContainer
+
+<h1>Sistema Reserva Salas</h1>
+<div class="container">
+
+    <div class="row bg-light">
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>Capacidade</th>
+                    <th>Descrição</th>
+                    <th>Disponível</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Salas.Any())
+                {
+                    @foreach (var sala in Salas)
+                    {
+                        <tr>
+                            <td>@sala.Id</td>
+                            <td>@sala.Nome</td>
+                            <td>@sala.Capacidade</td>
+                            <td>@sala.Descricao</td>
+                            <td>@sala.Ativo</td>
+                            <td>
+                                <button class="btn btn-danger" @onclick="(()=>ApagarSala(sala))">Deletar</button>
+                                <button class="btn btn-danger" @onclick="(()=>EditarSala(sala))">Editar</button>
+                            </td>
+                            
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr><td colspan="6"><strong>Nenhuma sala disponível</strong></td></tr>
+                }
+            </tbody>
+        </table>
+        <NavLink class="btn btn-info" href="/novoproduto">Criar nova Sala</NavLink>
+    </div>
+</div>
+
+
+@code {
+
+    List<Sala> Salas = new List<Sala>();
+    protected override async Task OnInitializedAsync()
+    {
+        await AtualizaSalas();
+    }
+
+    private async Task AtualizaSalas()
+    {
+        Salas = await service.RetornaSalaAsync();
+    }
+
+    private async Task ApagarSala(Sala sala){
+        bool confirmed = await JsRuntime.InvokeAsync<bool>("confirm", "Você tem certeza que deseja apagar a sala ?"); // Confirm
+        if(confirmed){
+            await service.DeleteProductAsync(sala);
+            await AtualizaSalas();
+            await JsRuntime.InvokeVoidAsync("alert", "Sala Deletada!");
+        }
+    }
+
+    private void EditarSala(Sala sala){
+        stateContainer.AtualizaValor(sala);
+        navigationManager.NavigateTo("/NovaSala");
+    }
+
+
+}
