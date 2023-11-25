@@ -51,7 +51,7 @@ public class SalaServices
         return sala;
     }
 
-    public async Task DeleteProductAsync(Sala sala)
+    public async Task DeleteRoomAsync(Sala sala)
     {
         try
         {

@@ -31,7 +31,7 @@
                             <td>@sala.Ativo</td>
                             <td>
                                 <button class="btn btn-danger" @onclick="(()=>ApagarSala(sala))">Deletar</button>
-                                <button class="btn btn-danger" @onclick="(()=>EditarSala(sala))">Editar</button>
+                                @* <button class="btn btn-danger" @onclick="(()=>EditarSala(sala))">Editar</button> *@
                             </td>
                             
                         </tr>
@@ -43,7 +43,7 @@
                 }
             </tbody>
         </table>
-        <NavLink class="btn btn-info" href="/novoproduto">Criar nova Sala</NavLink>
+        <NavLink class="btn btn-info" href="/novasala">Criar nova Sala</NavLink>
     </div>
 </div>
 
@@ -64,16 +64,16 @@
     private async Task ApagarSala(Sala sala){
         bool confirmed = await JsRuntime.InvokeAsync<bool>("confirm", "Você tem certeza que deseja apagar a sala ?"); // Confirm
         if(confirmed){
-            await service.DeleteProductAsync(sala);
+            await service.DeleteRoomAsync(sala);
             await AtualizaSalas();
             await JsRuntime.InvokeVoidAsync("alert", "Sala Deletada!");
         }
     }
 
     private void EditarSala(Sala sala){
-        stateContainer.AtualizaValor(sala);
+        stateContainer.AtualizaSala(sala);
         navigationManager.NavigateTo("/NovaSala");
-    }
+    } 
 
 
 }

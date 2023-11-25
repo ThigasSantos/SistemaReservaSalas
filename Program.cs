@@ -1,17 +1,28 @@
-using Microsoft.EntityFrameworkCore;
 using SistemaReservaSalas.Data;
+using Microsoft.EntityFrameworkCore;
+using SistemaReservaSalas.Shared;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddSingleton<WeatherForecastService>();
+builder.Services.AddSingleton<StateContainer>();
 builder.Services.AddDbContext<SalaDbContext>
 (options =>{
 options.UseSqlite("Data Source=Salas.db");
 });
-builder.Services.AddScoped<SalaDbContext>();
+builder.Services.AddScoped<SalaServices>();
+builder.Services.AddDbContext<UserDbContext>
+(options =>{
+options.UseSqlite("Data Source=Users.db");
+});
+builder.Services.AddScoped<UserServices>();
+builder.Services.AddDbContext<ReservaDbContext>
+(options =>{
+options.UseSqlite("Data Source=Reserva.db");
+});
+builder.Services.AddScoped<ReservaServices>();
 
 var app = builder.Build();
 
