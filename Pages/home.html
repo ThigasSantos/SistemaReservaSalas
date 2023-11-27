@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        header {
+            background-color: #f28900;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 20px;
+            background-color: #fff;
+            bottom: -20px;
+            left: 0;
+        }
+
+        .container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        #rooms-container, #reservations-container, #room-form {
+            flex: 1;
+            overflow-y: auto;
+            box-sizing: border-box;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+            border-radius: 8px;
+            position: relative;
+            z-index: 1;
+        }
+
+        #rooms-container {
+            border-right: 1px solid #ccc;
+        }
+
+        .room-item, .reservation-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            cursor: pointer;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .room-item:hover, .reservation-item:hover {
+            background-color: #f5f5f5;
+        }
+
+        #add-room-btn, #back-btn {
+            padding: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            background-color: #f28900;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+        }
+
+        #room-form, #reservation-details {
+            display: none;
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        .time-checkbox-group {
+            margin-bottom: 10px;
+        }
+
+        .time-checkbox {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        #reservations-container h2 {
+            margin-bottom: 10px;
+        }
+
+        #reservations-container .reservation-item {
+            position: relative;
+        }
+
+        #reservations-container .reservation-status {
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 5px;
+            border-radius: 4px;
+        }
+
+        #reservations-container .reservation-time {
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+
+        #reservations-container .status-livre {
+            background-color: #4caf50;
+            color: #fff;
+        }
+
+        #reservations-container .status-ocupado {
+            background-color: #f44336;
+            color: #fff;
+        }
+
+        #room-form button, #reservations-container .reserve-btn {
+            background-color: #f28900;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .account-info {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .account-info a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+    </style>
+    <title>Sala de Reservas</title>
+</head>
+<body>
+
+    <!-- Cabeçalho -->
+    <header>
+        <h1>Sistema de Reservas de Salas</h1>
+        <div class="account-info">
+            <span>Minha Conta</span>
+            <a href="#">Sair</a>
+        </div>
+    </header>
+
+    <!-- Salas e Reservas -->
+    <div class="container">
+
+        <!-- Sala List -->
+        <div id="rooms-container">
+            <h2>Lista de Salas</h2>
+            <div class="room-item" onclick="showRoomReservations('Sala A')">Sala A</div>
+            <div class="room-item" onclick="showRoomReservations('Sala B')">Sala B</div>
+            <div class="room-item" onclick="showRoomReservations('Sala C')">Sala C</div>
+            <button id="add-room-btn" onclick="showRoomForm()">Cadastrar Sala</button>
+        </div>
+
+        <!-- Reserva List -->
+        <div id="reservations-container">
+            <!-- Reserva items will be added dynamically here -->
+            <button id="back-btn" onclick="backToRooms()">Voltar para Salas</button>
+        </div>
+
+        <!-- Detalhes da Sala ou Cadastro de Sala -->
+        <div id="room-form">
+            <h2>Cadastrar Sala</h2>
+            <div class="form-group">
+                <label for="room-name">Nome da Sala:</label>
+                <input type="text" id="room-name" required>
+            </div>
+            <div class="form-group">
+                <label>Horários Disponíveis:</label>
+                <div class="time-checkbox-group">
+                    <input type="checkbox" class="time-checkbox" id="time1" value="07:20 - 9:00">
+                    <label for="time1">07:20 - 9:00</label>
+                </div>
+                <div class="time-checkbox-group">
+                    <input type="checkbox" class="time-checkbox" id="time2" value="09:10 - 10:50">
+                    <label for="time2">09:10 - 10:50</label>
+                </div>
+                <div class="time-checkbox-group">
+                    <input type="checkbox" class="time-checkbox" id="time3" value="11:00 - 12:40">
+                    <label for="time3">11:00 - 12:40</label>
+                </div>
+                <div class="time-checkbox-group">
+                    <input type="checkbox" class="time-checkbox" id="time4" value="13:20 - 14:00">
+                    <label for="time4">13:20 - 14:00</label>
+                </div>
+                <div class="time-checkbox-group">
+                    <input type="checkbox" class="time-checkbox" id="time5" value="14:10 - 16:50">
+                    <label for="time5">14:10 - 16:50</label>
+                </div>
+                <div class="time-checkbox-group">
+                    <input type="checkbox" class="time-checkbox" id="time6" value="17:00 - 18:40">
+                    <label for="time6">17:00 - 18:40</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <button onclick="addRoom()">Cadastrar</button>
+            </div>
+            <button id="back-btn" onclick="backToRooms()">Cancelar</button>
+        </div>
+
+    </div>
+
+    <script>
+        function showRoomReservations(roomName) {
+            document.getElementById('reservations-container').innerHTML = '';
+            var reservationsContainer = document.getElementById('reservations-container');
+            var title = document.createElement('h2');
+            title.textContent = `Reservas para ${roomName}`;
+            reservationsContainer.appendChild(title);
+
+            // Add reservations dynamically (you need to implement this)
+            // For now, let's simulate some reservations
+            var times = [
+                { time: '07:20 - 9:00', status: 'livre' },
+                { time: '09:10 - 10:50', status: 'ocupado' },
+                { time: '11:00 - 12:40', status: 'livre' },
+                { time: '13:20 - 14:00', status: 'ocupado' },
+                { time: '14:10 - 16:50', status: 'livre' },
+                { time: '17:00 - 18:40', status: 'livre' }
+            ];
+
+            for (var i = 0; i < times.length; i++) {
+                var timeInfo = times[i];
+                var reservationItem = document.createElement('div');
+                reservationItem.className = 'reservation-item';
+
+                var statusClass = timeInfo.status === 'livre' ? 'status-livre' : 'status-ocupado';
+
+                reservationItem.innerHTML = `<span class="reservation-time">${timeInfo.time}</span><span class="reservation-status ${statusClass}">${timeInfo.status}</span>`;
+                
+                // Add the "Reservar" button for the livre time
+                if (timeInfo.status === 'livre') {
+                    var reserveButton = document.createElement('button');
+                    reserveButton.className = 'reserve-btn';
+                    reserveButton.textContent = 'Reservar';
+                    reserveButton.onclick = function() {
+                        // Implement reserve logic here
+                        alert('Reserva realizada!');
+                    };
+                    reservationItem.appendChild(reserveButton);
+                }
+
+                reservationsContainer.appendChild(reservationItem);
+            }
+
+            // Display the reservations-container
+            document.getElementById('reservations-container').style.display = 'block';
+        }
+
+        function backToRooms() {
+            // Reset the content and display the rooms-container
+            document.getElementById('reservations-container').innerHTML = '';
+            document.getElementById('reservations-container').style.display = 'none';
+        }
+
+        function showRoomForm() {
+            // Display the room-form
+            document.getElementById('room-form').style.display = 'block';
+        }
+
+        function addRoom() {
+            // Implement room addition logic here
+            // You may want to update the room list and show the details for the newly added room
+            // For now, let's just go back to the rooms list
+            backToRooms();
+        }
+    </script>
+</body>
+</html>
