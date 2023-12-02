@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "3JM4xx6wpK9seZffrXO25Vo2p8AWzefV+Mk5pKtIZp49Wz1IRPiItf79HvL8yEjI2xoP0Z7RBsqittWaklZQeQ==",
+  "dgSpecHash": "L3CqYMQHd0C1/N6SVM7U+UOvaBgfSfoHlWKQ/37fviUaqJF1kNs3phD9gO04hHwpslV32dst7ogSt4wXTf+NBA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Tygsv\\OneDrive\\Documentos\\DotNetProjects\\TrabalhoFinal\\SistemaReservaSalas\\SistemaReservaSalas.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Tygsv\\.nuget\\packages\\fontawesome\\4.7.0\\fontawesome.4.7.0.nupkg.sha512",
     "C:\\Users\\Tygsv\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Tygsv\\.nuget\\packages\\microsoft.data.sqlite.core\\7.0.11\\microsoft.data.sqlite.core.7.0.11.nupkg.sha512",
     "C:\\Users\\Tygsv\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.11\\microsoft.entityframeworkcore.7.0.11.nupkg.sha512",
