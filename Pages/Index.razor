@@ -32,12 +32,12 @@
             {
                 @foreach (var sala in Salas)
                 {
-                    <div class="room-item" onclick="showRoomReservations('Sala A')">@sala.Nome
+                    <div class="room-item" onclick="showRoomReservations(@sala.Id)">@sala.Nome
                         <div class="room-item">
                             <button @onclick="() => EditarSala(sala)">
                                 <i class="fas fa-pencil-alt"></i> <!-- Ícone de lápis da FontAwesome -->
                             </button>
-                            <button @onclick="(() => ApagarSala(sala))">
+                            <button @onclick="() => ApagarSala(sala)">
                                 <i class="fas fa-trash-alt"></i> <!-- Ícone de lixeira da FontAwesome -->
                             </button>
                         </div>
@@ -50,12 +50,12 @@
         <!-- Reserva List -->
         <div id="reservations-container">
             <!-- Reserva items will be added dynamically here -->
-            <button id="back-btn" onclick="backToRooms()">Voltar para Salas</button>
+            <button id="back-btn" onclick="backToRooms()">Voltar</button>
         </div>
 
         <!-- Detalhes da Sala ou Cadastro de Sala -->
         <div id="room-form">
-            <h2>Cadastrar Sala</h2>
+            <h2>Informações Sala</h2>
             <div class="form-group">
                 <label for="room-name">Nome da Sala:</label>
                 <input type="text" id="room-name" @bind-value="@Room.Nome" required>
@@ -67,7 +67,7 @@
             <div class="form-group">
                 <button @onclick="AdicionarSala">Salvar</button>
             </div>
-            <button id="back-btn" onclick="backToRooms()">Cancelar</button>
+            <button id="back-btn" onclick="hideRoomForm()">Cancelar</button>
         </div>
 
     </div>
@@ -123,6 +123,12 @@
         Salas = await service.RetornaSalaAsync();
     }
 
+    private async void EditarSala(Sala sala)
+    {
+        stateContainer.AtualizaSala(sala);
+        await JsRuntime.InvokeVoidAsync("showRoomEditForm", sala.Nome, sala.Capacidade, sala.Descricao);
+    }
+
     private async Task AdicionarSala()
     {
         string mensagem;
@@ -133,7 +139,6 @@
             mensagem = "Produto salvo com sucesso";
         }else
         {
-            Room.Id = stateContainer.sala.Id;
             await service.UpdateRoomAsync(Room);
             mensagem = "Produto atualizado com sucesso";
             stateContainer.sala = null;
@@ -152,11 +157,4 @@
             await JsRuntime.InvokeVoidAsync("alert", "Sala Deletada!");
         }
     }
-
-    private async void EditarSala(Sala sala)
-    {
-        stateContainer.AtualizaSala(sala);
-        await JsRuntime.InvokeVoidAsync("showRoomEditForm", sala.Nome, sala.Capacidade, sala.Descricao);
-    }
-
 }
