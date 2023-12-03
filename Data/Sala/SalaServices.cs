@@ -36,17 +36,22 @@ public class SalaServices
     public async Task<Sala> UpdateRoomAsync(Sala sala)
     {
         try
-        {
+        {   
+            Console.WriteLine("salaID: {0}", sala.Id);
+            Console.WriteLine("salaCapacidade: {0}", sala.Capacidade);
+            Console.WriteLine("salaDescricao: {0}", sala.Descricao);
+            
             var salaExist = dbContext.Sala.FirstOrDefault(p => p.Id == sala.Id);
+            Console.WriteLine("salaExist: {0}", salaExist);
             if (salaExist != null)
             {
                 dbContext.Update(sala);
                 await dbContext.SaveChangesAsync();
             }
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            throw;
+            Console.WriteLine(ex);
         }
         return sala;
     }

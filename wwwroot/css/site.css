@@ -1,149 +1,171 @@
 @import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
-body{
-margin: 0;
-padding: 0;
-font-family: Arial, sans-serif;
-display: flex;
-flex-direction: column;
-min-height: 100vh;
-overflow: hidden;
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow: hidden;
 }
 
 header {
-background-color: #f28900;
-color: #fff;
-padding: 20px;
-text-align: center;
-position: relative;
+    background-color: #f28900;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    position: relative;
 }
 
 header::after {
-content: '';
-position: absolute;
-width: 100%;
-height: 20px;
-background-color: #fff;
-bottom: -20px;
-left: 0;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 20px;
+    background-color: #fff;
+    bottom: -20px;
+    left: 0;
 }
 
 .container {
-display: flex;
-flex: 1;
-overflow: hidden;
+    display: flex;
+    flex: 1;
+    overflow: hidden;
 }
 
-#rooms-container, #reservations-container, #room-form {
-flex: 1;
-overflow-y: auto;
-box-sizing: border-box;
-padding: 20px;
-background-color: #fff;
-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-margin: 20px;
-border-radius: 8px;
-position: relative;
-z-index: 1;
+#rooms-container,
+#reservations-container,
+#room-form {
+    flex: 1;
+    overflow-y: auto;
+    box-sizing: border-box;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    border-radius: 8px;
+    position: relative;
+    z-index: 1;
 }
 
 #rooms-container {
-border-right: 1px solid #ccc;
+    border-right: 1px solid #ccc;
 }
 
-.room-item, .reservation-item {
-margin-bottom: 10px;
-padding: 10px;
-border: 1px solid #ccc;
-background-color: #fff;
-cursor: pointer;
-border-radius: 4px;
-display: flex;
-justify-content: space-between;
-align-items: center;
+.room-item,
+.reservation-item {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.room-item:hover, .reservation-item:hover {
-background-color: #f5f5f5;
+.room-list-title {
+    margin-right: auto;
 }
 
-#add-room-btn, #back-btn {
-padding: 10px;
-margin-bottom: 10px;
-cursor: pointer;
-background-color: #f28900;
-color: #fff;
-border: none;
-border-radius: 4px;
+.room-button-action {
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    margin: 5px;
 }
 
-#room-form, #reservation-details {
-display: none;
+.room-item:hover,
+.reservation-item:hover {
+    background-color: #f5f5f5;
+}
+
+#add-room-btn,
+#back-btn {
+    padding: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    background-color: #f28900;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+}
+
+#room-form,
+#reservation-details {
+    display: none;
 }
 
 .form-group {
-margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 .time-checkbox-group {
-margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 .time-checkbox {
-display: block;
-margin-bottom: 5px;
+    display: block;
+    margin-bottom: 5px;
 }
 
 #reservations-container h2 {
-margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 #reservations-container .reservation-item {
-position: relative;
+    position: relative;
 }
 
 #reservations-container .reservation-status {
-position: absolute;
-top: 0;
-right: 0;
-padding: 5px;
-border-radius: 4px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 5px;
+    border-radius: 4px;
 }
 
 #reservations-container .reservation-time {
-display: inline-block;
-margin-bottom: 5px;
+    display: inline-block;
+    margin-bottom: 5px;
 }
 
 #reservations-container .status-livre {
-background-color: #4caf50;
-color: #fff;
+    background-color: #4caf50;
+    color: #fff;
 }
 
 #reservations-container .status-ocupado {
-background-color: #f44336;
-color: #fff;
+    background-color: #f44336;
+    color: #fff;
 }
 
-#room-form button, #reservations-container .reserve-btn {
-background-color: #f28900;
-color: #fff;
-border: none;
-padding: 10px;
-cursor: pointer;
-border-radius: 4px;
+#room-form button,
+#reservations-container .reserve-btn {
+    background-color: #f28900;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 4px;
 }
 
 .account-info {
-position: absolute;
-top: 20px;
-right: 20px;
-display: flex;
-align-items: center;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
 }
 
 .account-info a {
-color: #fff;
-text-decoration: none;
-margin-left: 20px;
+    color: #fff;
+    text-decoration: none;
+    margin-left: 20px;
 }

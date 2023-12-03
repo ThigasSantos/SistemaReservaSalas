@@ -1,19 +1,15 @@
-﻿@page "/"
+﻿@page "/sala"
 @inject SalaServices service
 @inject IJSRuntime JsRuntime
 @inject NavigationManager navigationManager
 @inject StateContainer stateContainer
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-ezVWzzRC8OXfGr4zUqZoLkAAjjLygRhHpPdHfPySExL39wBL6UVeP2bAAMHDUZ1D" crossorigin="anonymous">
-    <title>Sala de Reservas</title>
-</head>
 
 <body>
-    <!-- Cabeçalho -->
-    <header>
+
+    <AuthorizeView>
+    <Authorized>
+<header>
         <h1>Sistema de Reservas de Salas</h1>
         <div class="account-info">
             <span>Minha Conta</span>
@@ -32,19 +28,20 @@
             {
                 @foreach (var sala in Salas)
                 {
-                    <div class="room-item" onclick="showRoomReservations(@sala.Id)">@sala.Nome
-                        <div class="room-item">
-                            <button @onclick="() => EditarSala(sala)">
-                                <i class="fas fa-pencil-alt"></i> <!-- Ícone de lápis da FontAwesome -->
-                            </button>
-                            <button @onclick="() => ApagarSala(sala)">
-                                <i class="fas fa-trash-alt"></i> <!-- Ícone de lixeira da FontAwesome -->
-                            </button>
-                        </div>
+                    <div class="room-item" onclick="showRoomReservations(@sala.Id)">
+                        <span class="room-list-title">@sala.Nome</span>
+
+                        <button class="room-button-action" @onclick="() => AbrirTelaEditarSala(sala)">
+                            <i class="bi bi-pencil-square"></i>
+                        </button>
+                        <button class="room-button-action" @onclick="() => ApagarSala(sala)">
+                            <i class="bi bi-trash"></i>
+                        </button>
+
                     </div>
                 }
             }
-            <button id="add-room-btn" onclick="showRoomForm()">Cadastrar Sala</button>
+            <button id="add-room-btn" @onclick="AbrirTelaNovaSala">Cadastrar Sala</button>
         </div>
 
         <!-- Reserva List -->
@@ -71,6 +68,13 @@
         </div>
 
     </div>
+    </Authorized>
+    <NotAuthorized>
+        <span>Nao autenticado</span>
+    </NotAuthorized>
+</AuthorizeView>
+    <!-- Cabeçalho -->
+    
 </body>
 <script>
     function backToRooms() {
@@ -123,29 +127,50 @@
         Salas = await service.RetornaSalaAsync();
     }
 
-    private async void EditarSala(Sala sala)
-    {
-        stateContainer.AtualizaSala(sala);
-        await JsRuntime.InvokeVoidAsync("showRoomEditForm", sala.Nome, sala.Capacidade, sala.Descricao);
+    private async void AbrirTelaNovaSala(){
+        Room = new();
+        await JsRuntime.InvokeVoidAsync("showRoomForm");
+        
     }
 
+    private async void AbrirTelaEditarSala(Sala sala)
+    {        
+        Room = sala;
+        await JsRuntime.InvokeVoidAsync("showRoomEditForm", sala.Nome, sala.Capacidade, sala.Descricao);
+    }
+   
     private async Task AdicionarSala()
     {
-        string mensagem;
-        if (stateContainer.sala is null)
+        string mensagem = "";        
+        try
         {
-            Room.Ativo = true;
-            await service.AddRoomAsync(Room);
-            mensagem = "Produto salvo com sucesso";
-        }else
-        {
-            await service.UpdateRoomAsync(Room);
-            mensagem = "Produto atualizado com sucesso";
-            stateContainer.sala = null;
+            if (Room.Id == 0)
+            {
+                Room.Ativo = true;
+                await service.AddRoomAsync(Room);
+                mensagem = "Produto salvo com sucesso";
+            }
+            else
+            {
+                await service.UpdateRoomAsync(Room);
+                mensagem = "Produto atualizado com sucesso";
+                stateContainer.sala = null;
+            }
+
+            Room = new();
+            await AtualizaSalas();
+            JsRuntime.InvokeVoidAsync("hideRoomForm", "room-form");
+
         }
-        Room = new();
-        await AtualizaSalas();
-        JsRuntime.InvokeVoidAsync("hideRoomForm", "room-form");
+        catch (Exception ex)
+        {
+            Console.WriteLine("Erro ao tentar atualizar/adicionar sala");
+        }
+        finally
+        {
+            await JsRuntime.InvokeVoidAsync("alert", mensagem);
+        }
+
     }
     private async Task ApagarSala(Sala sala)
     {
