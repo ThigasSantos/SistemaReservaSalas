@@ -1,16 +1,23 @@
+using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using SistemaReservaSalas.Pages;
 namespace SistemaReservaSalas.Data;
 public class UserServices
 {
     #region Métodos privados
-    private UserDbContext dbContext;
+    private SistemaDbContext dbContext;
+
+    private readonly ProtectedLocalStorage protectedLocalStorage;
+
+    private readonly string userStorageKey = "SistemaReservaDeSala";
     #endregion
 
     #region Construtor
-    public UserServices(UserDbContext dbContext)
+    public UserServices(SistemaDbContext dbContext, ProtectedLocalStorage protectedLocalStorage)
     {
         this.dbContext = dbContext;
+        this.protectedLocalStorage = protectedLocalStorage;
     }
     #endregion
 
@@ -70,9 +77,9 @@ public class UserServices
         return await dbContext.User.FirstOrDefaultAsync(p => p.Id == id);
     }
 
-    public async Task<User> Login(User login)
+    public async Task<User> Login(string email, string senha)
     {
-        var user = dbContext.User.FirstOrDefault(p => p.Email == login.Email && p.Senha == login.Senha);
+        var user = dbContext.User.FirstOrDefault(p => p.Email == email && p.Senha == senha);
         if (user != null)
         {
             return user;
@@ -82,6 +89,33 @@ public class UserServices
             return null;
         }
     }
+
+    public async Task PersistUserToBrowserAsync(User user)
+    {
+        string userJson = JsonConvert.SerializeObject(user);
+        await protectedLocalStorage.SetAsync(userStorageKey, userJson);
+    }
+
+    public async Task<User?> FetchUserFromBrowserAsync()
+    {
+        try
+        {
+            var storedUserResult = await protectedLocalStorage.GetAsync<string>(userStorageKey);
+            if(storedUserResult.Success && !string.IsNullOrEmpty(storedUserResult.Value))
+            {
+                var user = JsonConvert.DeserializeObject<User>(storedUserResult.Value);
+                return user;
+            }
+        }
+        catch (System.Exception)
+        {
+            
+            
+        }
+        return null;
+    }
+
+    public async Task ClearBrowserUserDataAsync() => await protectedLocalStorage.DeleteAsync(userStorageKey);
 
     #endregion
 }

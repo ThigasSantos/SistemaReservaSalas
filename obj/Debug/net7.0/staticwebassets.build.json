@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "gOlsd/UZmgDynL9wNfpYmni1LBlbgPPoFBJormI2UnY=",
+  "Hash": "bumjnJJqrITdWhQYzMlOU1UZZKIkLUALwJz9dVHCQng=",
   "Source": "SistemaReservaSalas",
   "BasePath": "_content/SistemaReservaSalas",
   "Mode": "Default",
@@ -83,6 +83,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Identity": "C:\\Users\\enio1\\Documents\\dotnet\\SistemaReservaSalas\\wwwroot\\css\\open-iconic\\FONT-LICENSE",
+      "SourceId": "SistemaReservaSalas",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\enio1\\Documents\\dotnet\\SistemaReservaSalas\\wwwroot\\",
+      "BasePath": "_content/SistemaReservaSalas",
+      "RelativePath": "css/open-iconic/FONT-LICENSE",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\open-iconic\\FONT-LICENSE"
     },
     {
       "Identity": "C:\\Users\\enio1\\Documents\\dotnet\\SistemaReservaSalas\\wwwroot\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css",
@@ -185,23 +202,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.woff"
-    },
-    {
-      "Identity": "C:\\Users\\enio1\\Documents\\dotnet\\SistemaReservaSalas\\wwwroot\\css\\open-iconic\\FONT-LICENSE",
-      "SourceId": "SistemaReservaSalas",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\enio1\\Documents\\dotnet\\SistemaReservaSalas\\wwwroot\\",
-      "BasePath": "_content/SistemaReservaSalas",
-      "RelativePath": "css/open-iconic/FONT-LICENSE",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\open-iconic\\FONT-LICENSE"
     },
     {
       "Identity": "C:\\Users\\enio1\\Documents\\dotnet\\SistemaReservaSalas\\wwwroot\\css\\open-iconic\\ICON-LICENSE",

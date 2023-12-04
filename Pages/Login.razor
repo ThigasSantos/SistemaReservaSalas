@@ -4,10 +4,17 @@
 @inject IJSRuntime JsRuntime
 @inject NavigationManager navigationManager
 @inject StateContainer stateContainer
+@inject ReservaSalaAuthenticationStateProvider ReservaSalaAuthenticationStateProvider
 
 <h3>Login</h3>
 
-<EditForm>
+<body>
+    <div>
+        <button @onclick="LoginAsync">Login</button>
+    </div>
+</body>
+
+@* <EditForm>
     <DataAnnotationsValidator />
     <ValidationSummary />
 
@@ -24,12 +31,12 @@
     </div>
 
     <button class="btn btn-danger" @onclick="(()=>HandleValidSubmit(user))">Deletar</button>
-</EditForm>
+</EditForm> *@
 
 @code {
     private User user = new User();
 
-    private async Task HandleValidSubmit(User user)
+    @* private async Task HandleValidSubmit(User user)
     {
         User result = await userServices.Login(user);
 
@@ -41,6 +48,15 @@
         else
         {
             await JsRuntime.InvokeVoidAsync("alert", "Usuário ou senha inválidos");
+        }
+    } *@
+
+    public async Task LoginAsync(){
+        Console.WriteLine("LOGIN+++++++++++++");
+        await ReservaSalaAuthenticationStateProvider.LoginAsync("teste@teste.com", "teste");
+
+        if(ReservaSalaAuthenticationStateProvider.CurrentUser.Email is not null) {
+            navigationManager.NavigateTo("/sala");
         }
     }
 }

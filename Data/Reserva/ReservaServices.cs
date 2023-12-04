@@ -3,11 +3,11 @@ namespace SistemaReservaSalas.Data;
 public class ReservaServices
 {
     #region Métodos privados
-    private ReservaDbContext dbContext;
+    private SistemaDbContext dbContext;
     #endregion
 
     #region Construtor
-    public ReservaServices(ReservaDbContext dbContext)
+    public ReservaServices(SistemaDbContext dbContext)
     {
         this.dbContext = dbContext;
     }

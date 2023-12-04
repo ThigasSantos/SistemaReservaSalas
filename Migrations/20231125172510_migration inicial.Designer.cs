@@ -9,7 +9,7 @@ using SistemaReservaSalas.Data;
 
 namespace SistemaReservaSalas.Migrations
 {
-    [DbContext(typeof(SalaDbContext))]
+    [DbContext(typeof(SistemaDbContext))]
     [Migration("20231125172510_migration inicial")]
     partial class migrationinicial
     {

@@ -3,17 +3,14 @@
 @inject IJSRuntime JsRuntime
 @inject NavigationManager navigationManager
 @inject StateContainer stateContainer
-
+@inject ReservaSalaAuthenticationStateProvider ReservaSalaAuthenticationStateProvider
 
 <body>
-
-    <AuthorizeView>
-    <Authorized>
 <header>
         <h1>Sistema de Reservas de Salas</h1>
         <div class="account-info">
             <span>Minha Conta</span>
-            <a href="#">Sair</a>
+            <button @onclick="Logout">Sair</button>
         </div>
     </header>
 
@@ -41,7 +38,12 @@
                     </div>
                 }
             }
-            <button id="add-room-btn" @onclick="AbrirTelaNovaSala">Cadastrar Sala</button>
+            <AuthorizeView>
+                <Authorized>
+                    <button id="add-room-btn" @onclick="AbrirTelaNovaSala">Cadastrar Sala</button>
+                </Authorized>
+            </AuthorizeView>
+            
         </div>
 
         <!-- Reserva List -->
@@ -68,11 +70,6 @@
         </div>
 
     </div>
-    </Authorized>
-    <NotAuthorized>
-        <span>Nao autenticado</span>
-    </NotAuthorized>
-</AuthorizeView>
     <!-- Cabeçalho -->
     
 </body>
@@ -181,5 +178,11 @@
             await AtualizaSalas();
             await JsRuntime.InvokeVoidAsync("alert", "Sala Deletada!");
         }
+    }
+
+    private async Task Logout()
+    {
+        await ReservaSalaAuthenticationStateProvider.LogoutAsync();
+        navigationManager.NavigateTo("/login");
     }
 }

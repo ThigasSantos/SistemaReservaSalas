@@ -1,6 +1,7 @@
 using SistemaReservaSalas.Data;
 using Microsoft.EntityFrameworkCore;
 using SistemaReservaSalas.Shared;
+using Microsoft.AspNetCore.Components.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,21 +9,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<StateContainer>();
-builder.Services.AddDbContext<SalaDbContext>
+builder.Services.AddDbContext<SistemaDbContext>
 (options =>{
 options.UseSqlite("Data Source=Salas.db");
 });
 builder.Services.AddScoped<SalaServices>();
-builder.Services.AddDbContext<UserDbContext>
-(options =>{
-options.UseSqlite("Data Source=Users.db");
-});
 builder.Services.AddScoped<UserServices>();
-builder.Services.AddDbContext<ReservaDbContext>
-(options =>{
-options.UseSqlite("Data Source=Reserva.db");
-});
 builder.Services.AddScoped<ReservaServices>();
+builder.Services.AddScoped<ReservaSalaAuthenticationStateProvider>();
+builder.Services.AddScoped<AuthenticationStateProvider>(sp => sp.GetRequiredService<ReservaSalaAuthenticationStateProvider>());
 
 var app = builder.Build();
 
