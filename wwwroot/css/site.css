@@ -169,3 +169,68 @@ header::after {
     text-decoration: none;
     margin-left: 20px;
 }
+
+.login-body {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    padding-top: 10%;
+    align-items: center;
+    background-color: #f4f4f4;
+}
+
+.login-container, .cadastro-container {
+    background-color: #fff;
+    /* border: 1px solid #ccc; */
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    max-width: 300px;
+    gap: 10px;
+    border-radius: 5%;
+    box-shadow: 8px 8px 25px -5px rgba(0,0,0,0.54);
+    -webkit-box-shadow: 8px 8px 25px -5px rgba(0,0,0,0.54);
+    -moz-box-shadow: 8px 8px 25px -5px rgba(0,0,0,0.54);
+}
+
+.login-title, .cadastro-title {
+    width: 100%;
+    text-align: center;
+    color: #f28900;
+}
+
+.input-login-email,
+.input-login-password,
+.input-cadastro-nome,
+.input-cadastro-email,
+.input-cadastro-password
+{
+    border-radius: 5px;
+    border: 1px solid #f28900;
+    background-color: #f4f4f4;
+}
+
+.button-login, .button-novo-cadastro {
+    background-color: #f28900;
+    color: #fff;
+    border: 1px solid #f28900;
+    border-radius: 5px;
+    margin-top: 10px;
+    border: 1pxl
+}
+
+.button-cadastro {
+    background-color: #fff;
+    color: #f28900;
+    border: 1px solid #f28900;
+    border-radius: 5px;
+    border: 1pxl
+}
+
+.cadastro-container{
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+}

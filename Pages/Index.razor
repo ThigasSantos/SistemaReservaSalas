@@ -72,7 +72,6 @@
     </div>
     <!-- Cabeçalho -->
     
-</body>
 <script>
     function backToRooms() {
         // Reset the content and display the rooms-container
@@ -109,6 +108,8 @@
         document.getElementById('room-description').value = '';
     }
 </script>
+</body>
+
 
 @code {
 
@@ -183,6 +184,6 @@
     private async Task Logout()
     {
         await ReservaSalaAuthenticationStateProvider.LogoutAsync();
-        navigationManager.NavigateTo("/login");
+        navigationManager.NavigateTo("/");
     }
 }

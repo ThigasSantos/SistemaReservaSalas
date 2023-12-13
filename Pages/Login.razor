@@ -1,4 +1,4 @@
-@page "/login"
+@page "/"
 @using Microsoft.AspNetCore.Components.Forms
 @inject UserServices userServices
 @inject IJSRuntime JsRuntime
@@ -6,35 +6,23 @@
 @inject StateContainer stateContainer
 @inject ReservaSalaAuthenticationStateProvider ReservaSalaAuthenticationStateProvider
 
-<h3>Login</h3>
 
-<body>
-    <div>
-        <button @onclick="LoginAsync">Login</button>
+
+<body class="login-body">
+    <div class="login-container">
+        <h3 class="login-title">Login</h3>
+        <input class="input-login-email" type="email" id="email" @bind-value="@email" />
+        <input class="input-login-password" type="password" id="password" @bind-value="@password" />
+        <button class="button-login" @onclick="LoginAsync">Login</button>
+        <button class="button-cadastro" @onclick="GoToCadastro">Cadastrar</button>
     </div>
 </body>
 
-@* <EditForm>
-    <DataAnnotationsValidator />
-    <ValidationSummary />
-
-    <div class="form-group">
-        <label for="email">Email:</label>
-        <InputText id="email" class="form-control" @bind-Value="user.Email" />
-        <ValidationMessage For="@(() => user.Email)" />
-    </div>
-
-    <div class="form-group">
-        <label for="password">Senha:</label>
-        <InputText id="password" class="form-control" @bind-Value="user.Senha" type="password" />
-        <ValidationMessage For="@(() => user.Senha)" />
-    </div>
-
-    <button class="btn btn-danger" @onclick="(()=>HandleValidSubmit(user))">Deletar</button>
-</EditForm> *@
-
 @code {
     private User user = new User();
+
+    string email;
+    string password;
 
     @* private async Task HandleValidSubmit(User user)
     {
@@ -52,11 +40,15 @@
     } *@
 
     public async Task LoginAsync(){
-        Console.WriteLine("LOGIN+++++++++++++");
-        await ReservaSalaAuthenticationStateProvider.LoginAsync("teste@teste.com", "teste");
+        
+        await ReservaSalaAuthenticationStateProvider.LoginAsync(email, password);
 
         if(ReservaSalaAuthenticationStateProvider.CurrentUser.Email is not null) {
             navigationManager.NavigateTo("/sala");
         }
+    }
+
+    public async Task GoToCadastro(){
+            navigationManager.NavigateTo("/cadastro");
     }
 }
