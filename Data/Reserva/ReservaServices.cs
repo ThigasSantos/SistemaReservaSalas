@@ -19,8 +19,9 @@ public class ReservaServices
         return await dbContext.Reserva.ToListAsync();
     }
 
-    public async Task<List<Reserva>> RetornaReservasAsyncByDateAndRoom(int roomId, DateTime diaBase){
-        
+    public async Task<List<Reserva>> RetornaReservasAsyncByDateAndRoom(int roomId, DateTime diaBase)
+    {
+
         return await dbContext.Reserva.AsNoTracking().Where(res => res.SalaId == roomId && res.DataInicio.DayOfYear == diaBase.DayOfYear && res.DataInicio.Year == diaBase.Year).ToListAsync();
     }
 
@@ -36,6 +37,70 @@ public class ReservaServices
             throw;
         }
         return reserva;
+    }
+
+    public async Task<List<ReservaPorUser>> GetReservaPorUsersAsync()
+    {
+        try
+        {
+
+
+            var statement = "" +
+            "Select json_group_array(json_object('UserId', UserId,'Nome',Nome, 'Quantidade', Quantidade)) AS " +
+            "json_result from ( " +
+            "SELECT r.UserId as UserId, u.Nome as Nome, count(r.Id) as Quantidade " +
+            "FROM Reserva r " +
+            "JOIN User u " +
+            "on u.Id = r.UserId " +
+            "GROUP by u.Id " +
+            ");";
+
+
+
+
+            var asJson = string.Join("", dbContext.Database.SqlQueryRaw<string>(statement));
+            Console.WriteLine(asJson);
+            return System.Text.Json.JsonSerializer.Deserialize<List<ReservaPorUser>>(asJson);
+
+
+        }
+        catch (System.Exception)
+        {
+
+            throw;
+        }
+    }
+
+    public async Task<List<ReservaPorSala>> GetReservaPorSalaAsync()
+    {
+        try
+        {
+
+
+            var statement = "" +
+            "Select json_group_array(json_object('SalaId', SalaId,'Nome',Nome, 'Quantidade', Quantidade)) AS " +
+            "json_result from ( " +
+            "SELECT r.SalaId as SalaId, u.Nome as Nome, count(r.Id) as Quantidade " +
+            "FROM Reserva r " +
+            "JOIN Sala u " +
+            "on u.Id = r.SalaId " +
+            "GROUP by u.Id " +
+            ");";
+
+
+
+
+            var asJson = string.Join("", dbContext.Database.SqlQueryRaw<string>(statement));
+            Console.WriteLine(asJson);
+            return System.Text.Json.JsonSerializer.Deserialize<List<ReservaPorSala>>(asJson);
+
+
+        }
+        catch (System.Exception)
+        {
+
+            throw;
+        }
     }
 
     public async Task<Reserva> UpdateReservaAsync(Reserva reserva)
@@ -62,7 +127,7 @@ public class ReservaServices
         Console.WriteLine("chegou aqui");
         try
         {
-            
+
             dbContext.Reserva.Remove(reserva);
             dbContext.SaveChanges();
         }

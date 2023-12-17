@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+
 namespace SistemaReservaSalas.Data;
 
 public class Reserva{
@@ -18,4 +20,16 @@ public class PrepareReserva {
     public bool MostrarBotaoRemoverReserva { get; set; }
     public bool MostrarMensagemReservaDeOutroUsuario { get; set; }
     public Reserva reserva { get; set; }
+}
+
+public class ReservaPorUser {
+    public int UserId { get; set;}
+    public string Nome { get; set;}
+    public int Quantidade { get; set;}
+}
+
+public class ReservaPorSala {
+    public int SalaId { get; set;}
+    public string Nome { get; set;}
+    public int Quantidade { get; set;}
 }

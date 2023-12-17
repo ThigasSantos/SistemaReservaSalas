@@ -11,11 +11,19 @@ public class SistemaDbContext : DbContext{
     public DbSet<Sala> Sala { get; set; }
     public DbSet<User> User { get; set; }
     public DbSet<Reserva> Reserva { get; set; }
+    
     #endregion
 
     #region Métodos sobrecarregados
     protected override void OnModelCreating(ModelBuilder modelBuilder){
         base.OnModelCreating(modelBuilder);
+    }
+
+    protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+    {
+    
+        base.ConfigureConventions(configurationBuilder);
+
     }
     #endregion
 

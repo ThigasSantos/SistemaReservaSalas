@@ -1,10 +1,12 @@
 ﻿@page "/sala"
 @inject SalaServices service
 @inject ReservaServices reservaSerice
+@inject UserServices userService
 @inject IJSRuntime JsRuntime
 @inject NavigationManager navigationManager
 @inject StateContainer stateContainer
 @inject ReservaSalaAuthenticationStateProvider ReservaSalaAuthenticationStateProvider
+@using SistemaReservaSalas.PDF
 
 <body class="content-body">
     <header>
@@ -627,6 +629,19 @@
 
     private async Task GerarRelatorio(){
         Console.WriteLine("Gerar relatório");
+
+        List<Sala> salas = await service.RetornaSalaAsync();
+        List<User> users = await userService.RetornaUserAsync();
+
+        List<ReservaPorUser> reservaPorUsers = await reservaSerice.GetReservaPorUsersAsync();
+        List<ReservaPorSala> reservaPorSalas = await reservaSerice.GetReservaPorSalaAsync();
+
+        reservaPorUsers.ForEach(ru => {
+            Console.WriteLine("{0} {1} {2}", ru.UserId, ru.Nome, ru.Quantidade);
+        });
+
+        var pdf = new PDFGenerator();
+        pdf.DownloadPdf(JsRuntime, salas, users, reservaPorSalas, reservaPorUsers);
     }
 
     private async Task Logout()
