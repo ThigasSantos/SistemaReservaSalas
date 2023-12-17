@@ -1,15 +1,17 @@
 ﻿@page "/sala"
 @inject SalaServices service
+@inject ReservaServices reservaSerice
 @inject IJSRuntime JsRuntime
 @inject NavigationManager navigationManager
 @inject StateContainer stateContainer
 @inject ReservaSalaAuthenticationStateProvider ReservaSalaAuthenticationStateProvider
 
-<body>
-<header>
+<body class="content-body">
+    <header>
         <h1>Sistema de Reservas de Salas</h1>
         <div class="account-info">
-            <span>Minha Conta</span>
+            <span>Minha Conta - @ReservaSalaAuthenticationStateProvider.CurrentUser.Email - </span>
+
             <button @onclick="Logout">Sair</button>
         </div>
     </header>
@@ -25,16 +27,18 @@
             {
                 @foreach (var sala in Salas)
                 {
-                    <div class="room-item" onclick="showRoomReservations(@sala.Id)">
+                    <div class="room-item" @onclick="() => ShowRoomReservations(sala.Id)">
                         <span class="room-list-title">@sala.Nome</span>
-
-                        <button class="room-button-action" @onclick="() => AbrirTelaEditarSala(sala)">
-                            <i class="bi bi-pencil-square"></i>
-                        </button>
-                        <button class="room-button-action" @onclick="() => ApagarSala(sala)">
-                            <i class="bi bi-trash"></i>
-                        </button>
-
+                        <AuthorizeView Roles="admin,user">
+                            <Authorized>
+                                <button class="room-button-action" @onclick="() => AbrirTelaEditarSala(sala)">
+                                    <i class="bi bi-pencil-square"></i>
+                                </button>
+                                <button class="room-button-action" @onclick="() => ApagarSala(sala)">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </Authorized>
+                        </AuthorizeView>
                     </div>
                 }
             }
@@ -43,13 +47,169 @@
                     <button id="add-room-btn" @onclick="AbrirTelaNovaSala">Cadastrar Sala</button>
                 </Authorized>
             </AuthorizeView>
-            
+
+            <AuthorizeView Roles="admin">
+                <Authorized>
+                    <button id="add-room-btn" @onclick="GerarRelatorio">Gerar relatório
+                    </button>
+                </Authorized>
+            </AuthorizeView>
+
         </div>
 
         <!-- Reserva List -->
         <div id="reservations-container">
-            <!-- Reserva items will be added dynamically here -->
-            <button id="back-btn" onclick="backToRooms()">Voltar</button>
+
+            <div id="mensagem-reserva-horario">
+                <h2>Selecione uma sala</h2>
+            </div>
+
+            <div id="loading-reservas" style="display: none;">
+                <h2>Carregando...</h2>
+            </div>
+
+            <div id="lista-horarios-reservas" style="display: none;">
+                <h2>Sala @RoomShowReservations.Nome </h2>
+                <input type="date" id="day-picker" name="input-day" @bind="DataSelecionada"
+                    @bind:after="AtualizaData" />
+                <div>
+
+                    <div class="linha-horario">
+                        <span class="horario">7h - 9h </span>
+                        <AuthorizeView>
+                            <Authorized>
+                                @if (@Horario1.MostrarBotaoReservar)
+                                {
+                                    <button class="button-reservar-horario" @onclick="() => AdicionaReserva(Horario1)"
+                                        aria-hidden="@Horario1.MostrarBotaoReservar">Reservar</button>
+                                }
+                                @if (@Horario1.MostrarBotaoRemoverReserva)
+                                {
+                                    <button class="button-desreservar-horario"
+                                        @onclick="() => RemoveReserva(Horario1)">Remover reserva</button>
+                                }
+                                @if (@Horario1.MostrarMensagemReservaDeOutroUsuario)
+                                {
+                                    <span class="mensagem-reserva-horario">Reservado por outro usuário</span>
+                                }
+                            </Authorized>
+                        </AuthorizeView>
+                    </div>
+
+                    <div class="linha-horario">
+                        <span class="horario">9h - 11h </span>
+                        <AuthorizeView>
+                            <Authorized>
+                                @if (@Horario2.MostrarBotaoReservar)
+                                {
+                                    <button class="button-reservar-horario" @onclick="() => AdicionaReserva(Horario2)"
+                                        aria-hidden="@Horario2.MostrarBotaoReservar">Reservar</button>
+                                }
+                                @if (@Horario2.MostrarBotaoRemoverReserva)
+                                {
+                                    <button class="button-desreservar-horario"
+                                        @onclick="() => RemoveReserva(Horario2)">Remover reserva</button>
+                                }
+                                @if (@Horario2.MostrarMensagemReservaDeOutroUsuario)
+                                {
+                                    <span class="mensagem-reserva-horario">Reservado por outro usuário</span>
+                                }
+                            </Authorized>
+                        </AuthorizeView>
+                    </div>
+
+                    <div class="linha-horario">
+                        <span class="horario">11h - 13h </span>
+                        <AuthorizeView>
+                            <Authorized>
+                                @if (@Horario3.MostrarBotaoReservar)
+                                {
+                                    <button class="button-reservar-horario" @onclick="() => AdicionaReserva(Horario3)"
+                                        aria-hidden="@Horario3.MostrarBotaoReservar">Reservar</button>
+                                }
+                                @if (@Horario3.MostrarBotaoRemoverReserva)
+                                {
+                                    <button class="button-desreservar-horario"
+                                        @onclick="() => RemoveReserva(Horario3)">Remover reserva</button>
+                                }
+                                @if (@Horario3.MostrarMensagemReservaDeOutroUsuario)
+                                {
+                                    <span class="mensagem-reserva-horario">Reservado por outro usuário</span>
+                                }
+                            </Authorized>
+                        </AuthorizeView>
+                    </div>
+
+                    <div class="linha-horario">
+                        <span class="horario">13h - 15h </span>
+                        <AuthorizeView>
+                            <Authorized>
+                                @if (@Horario4.MostrarBotaoReservar)
+                                {
+                                    <button class="button-reservar-horario" @onclick="() => AdicionaReserva(Horario4)"
+                                        aria-hidden="@Horario4.MostrarBotaoReservar">Reservar</button>
+                                }
+                                @if (@Horario4.MostrarBotaoRemoverReserva)
+                                {
+                                    <button class="button-desreservar-horario"
+                                        @onclick="() => RemoveReserva(Horario4)">Remover reserva</button>
+                                }
+                                @if (@Horario4.MostrarMensagemReservaDeOutroUsuario)
+                                {
+                                    <span class="mensagem-reserva-horario">Reservado por outro usuário</span>
+                                }
+                            </Authorized>
+                        </AuthorizeView>
+                    </div>
+
+                    <div class="linha-horario">
+                        <span class="horario">15h - 17h </span>
+                        <AuthorizeView>
+                            <Authorized>
+                                @if (@Horario5.MostrarBotaoReservar)
+                                {
+                                    <button class="button-reservar-horario" @onclick="() => AdicionaReserva(Horario5)"
+                                        aria-hidden="@Horario5.MostrarBotaoReservar">Reservar</button>
+                                }
+                                @if (@Horario5.MostrarBotaoRemoverReserva)
+                                {
+                                    <button class="button-desreservar-horario"
+                                        @onclick="() => RemoveReserva(Horario5)">Remover reserva</button>
+                                }
+                                @if (@Horario5.MostrarMensagemReservaDeOutroUsuario)
+                                {
+                                    <span class="mensagem-reserva-horario">Reservado por outro usuário</span>
+                                }
+                            </Authorized>
+                        </AuthorizeView>
+                    </div>
+
+                    <div class="linha-horario">
+                        <span class="horario">17h - 19h </span>
+                        <AuthorizeView>
+                            <Authorized>
+                                @if (@Horario6.MostrarBotaoReservar)
+                                {
+                                    <button class="button-reservar-horario" @onclick="() => AdicionaReserva(Horario6)"
+                                        aria-hidden="@Horario6.MostrarBotaoReservar">Reservar</button>
+                                }
+                                @if (@Horario6.MostrarBotaoRemoverReserva)
+                                {
+                                    <button class="button-desreservar-horario"
+                                        @onclick="() => RemoveReserva(Horario6)">Remover reserva</button>
+                                }
+                                @if (@Horario6.MostrarMensagemReservaDeOutroUsuario)
+                                {
+                                    <span class="mensagem-reserva-horario">Reservado por outro usuário</span>
+                                }
+                            </Authorized>
+                        </AuthorizeView>
+                    </div>
+
+
+
+                </div>
+            </div>
         </div>
 
         <!-- Detalhes da Sala ou Cadastro de Sala -->
@@ -71,75 +231,107 @@
 
     </div>
     <!-- Cabeçalho -->
-    
-<script>
-    function backToRooms() {
-        // Reset the content and display the rooms-container
-        document.getElementById('reservations-container').innerHTML = '';
-        document.getElementById('reservations-container').style.display = 'none';
-    }
 
-    function showRoomForm() {
-        // Display the room-form
-        document.getElementById('room-form').style.display = 'block';
-    }
+    <script>
 
-    function showRoomReservations(roomName) {
-        // Display the reservations-container
-        document.getElementById('reservations-container').style.display = 'block';
-        // Add the room name to the reservations-container
-        document.getElementById('reservations-container').innerHTML = '<h2>Reservas da ' + roomName + '</h2>';
-    }
+        function showRoomForm() {
+            // Display the room-form
+            document.getElementById('room-form').style.display = 'block';
+        }
 
-    function showRoomEditForm(roomName, roomCapacity, roomDescription) {
-        // Display the room-form
-        document.getElementById('room-form').style.display = 'block';
-        // Add the room name to the room-form
-        document.getElementById('room-name').value = roomName;
-        document.getElementById('room-capacity').value = roomCapacity;
-        document.getElementById('room-description').value = roomDescription;
-    }
+        function showRoomEditForm(roomName, roomCapacity, roomDescription) {
+            // Display the room-form
+            document.getElementById('room-form').style.display = 'block';
+            // Add the room name to the room-form
+            document.getElementById('room-name').value = roomName;
+            document.getElementById('room-capacity').value = roomCapacity;
+            document.getElementById('room-description').value = roomDescription;
+        }
 
-    function hideRoomForm() {
-        // Reset the content and hide the room-form
-        document.getElementById('room-form').style.display = 'none';
-        document.getElementById('room-name').value = '';
-        document.getElementById('room-capacity').value = '';
-        document.getElementById('room-description').value = '';
-    }
-</script>
+        function showMessageReservas() {
+            document.getElementById("mensagem-reserva-horario").style.display = null;
+            document.getElementById("loading-reservas").style.display = "none";
+            document.getElementById("lista-horarios-reservas").style.display = "none";
+        }
+
+        function showLoading() {
+            document.getElementById("mensagem-reserva-horario").style.display = "none";
+            document.getElementById("loading-reservas").style.display = null;
+            document.getElementById("lista-horarios-reservas").style.display = "none";
+        }
+
+        function showListaHorarios() {
+            document.getElementById("mensagem-reserva-horario").style.display = "none";
+            document.getElementById("loading-reservas").style.display = "none";
+            document.getElementById("lista-horarios-reservas").style.display = null;
+        }
+
+        function hideRoomForm() {
+            // Reset the content and hide the room-form
+            document.getElementById('room-form').style.display = 'none';
+            document.getElementById('room-name').value = '';
+            document.getElementById('room-capacity').value = '';
+            document.getElementById('room-description').value = '';
+        }
+    </script>
 </body>
 
 
 @code {
 
+    User CurrentUser { get; set; } = new();
     List<Sala> Salas = new List<Sala>();
     Sala Room { get; set; } = new();
+    Sala RoomShowReservations { get; set; } = new();
+    DateTime DataSelecionada { get; set; } = new();
+
+    List<Reserva> ListaReservas = new List<Reserva>();
+
+    PrepareReserva Horario1 { get; set; } = new();
+    PrepareReserva Horario2 { get; set; } = new();
+    PrepareReserva Horario3 { get; set; } = new();
+
+    PrepareReserva Horario4 { get; set; } = new();
+    PrepareReserva Horario5 { get; set; } = new();
+    PrepareReserva Horario6 { get; set; } = new();
+
+
+
     protected override async Task OnInitializedAsync()
     {
         await AtualizaSalas();
     }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+        CurrentUser = ReservaSalaAuthenticationStateProvider.CurrentUser;
+        StateHasChanged();
+    }
+
+
 
     private async Task AtualizaSalas()
     {
         Salas = await service.RetornaSalaAsync();
     }
 
-    private async void AbrirTelaNovaSala(){
+    private async void AbrirTelaNovaSala()
+    {
         Room = new();
         await JsRuntime.InvokeVoidAsync("showRoomForm");
-        
+
     }
 
     private async void AbrirTelaEditarSala(Sala sala)
-    {        
+    {
         Room = sala;
         await JsRuntime.InvokeVoidAsync("showRoomEditForm", sala.Nome, sala.Capacidade, sala.Descricao);
     }
-   
+
     private async Task AdicionarSala()
     {
-        string mensagem = "";        
+        string mensagem = "";
         try
         {
             if (Room.Id == 0)
@@ -179,6 +371,262 @@
             await AtualizaSalas();
             await JsRuntime.InvokeVoidAsync("alert", "Sala Deletada!");
         }
+    }
+
+
+    private async Task ShowRoomReservations(int roomId)
+    {
+        await JsRuntime.InvokeVoidAsync("showLoading");
+        Console.WriteLine(roomId);
+
+        try
+        {
+            DataSelecionada = DateTime.Today;
+            RoomShowReservations = await service.RetornaSalaByIdAsync(roomId);
+
+            await AtribuiHorarios(roomId);
+        }
+        catch (Exception error)
+        {
+            Console.WriteLine(error);
+        }
+
+        await JsRuntime.InvokeVoidAsync("showListaHorarios");
+
+
+
+    }
+
+    private async Task AtribuiHorarios(int roomId)
+    {
+
+        ListaReservas = await reservaSerice.RetornaReservasAsyncByDateAndRoom(roomId, DataSelecionada);
+
+        int ano = DataSelecionada.Year;
+        int mes = DataSelecionada.Month;
+        int dia = DataSelecionada.Day;
+
+        Horario1.DataInicio = new DateTime(ano, mes, dia, 7, 00, 00);
+        Horario1.DataFim = new DateTime(ano, mes, dia, 8, 59, 59);
+
+        Horario1.MostrarBotaoReservar = true;
+        Horario1.MostrarBotaoRemoverReserva = false;
+        Horario1.MostrarMensagemReservaDeOutroUsuario = false;
+
+        Horario2.DataInicio = new DateTime(ano, mes, dia, 9, 00, 00);
+        Horario2.DataFim = new DateTime(ano, mes, dia, 10, 59, 59);
+
+        Horario2.MostrarBotaoReservar = true;
+        Horario2.MostrarBotaoRemoverReserva = false;
+        Horario2.MostrarMensagemReservaDeOutroUsuario = false;
+
+        Horario3.DataInicio = new DateTime(ano, mes, dia, 11, 00, 00);
+        Horario3.DataFim = new DateTime(ano, mes, dia, 12, 59, 59);
+
+        Horario3.MostrarBotaoReservar = true;
+        Horario3.MostrarBotaoRemoverReserva = false;
+        Horario3.MostrarMensagemReservaDeOutroUsuario = false;
+
+        Horario4.DataInicio = new DateTime(ano, mes, dia, 13, 00, 00);
+        Horario4.DataFim = new DateTime(ano, mes, dia, 14, 59, 59);
+
+        Horario4.MostrarBotaoReservar = true;
+        Horario4.MostrarBotaoRemoverReserva = false;
+        Horario4.MostrarMensagemReservaDeOutroUsuario = false;
+
+        Horario5.DataInicio = new DateTime(ano, mes, dia, 15, 00, 00);
+        Horario5.DataFim = new DateTime(ano, mes, dia, 16, 59, 59);
+
+        Horario5.MostrarBotaoReservar = true;
+        Horario5.MostrarBotaoRemoverReserva = false;
+        Horario5.MostrarMensagemReservaDeOutroUsuario = false;
+
+        Horario6.DataInicio = new DateTime(ano, mes, dia, 17, 00, 00);
+        Horario6.DataFim = new DateTime(ano, mes, dia, 18, 59, 59);
+
+        Horario6.MostrarBotaoReservar = true;
+        Horario6.MostrarBotaoRemoverReserva = false;
+        Horario6.MostrarMensagemReservaDeOutroUsuario = false;
+
+
+
+        int idCurrentUser = ReservaSalaAuthenticationStateProvider.CurrentUser.Id;
+
+
+
+        int cont = 0;
+        ListaReservas.ForEach((reserva) =>
+        {
+
+            cont++;
+            switch (reserva.DataInicio.Hour)
+            {
+                case 7:
+                    {
+
+                        if (reserva.UserId == idCurrentUser)
+                        {
+                            Horario1.reserva = reserva;
+                            Horario1.MostrarBotaoReservar = false;
+                            Horario1.MostrarBotaoRemoverReserva = true;
+                            Horario1.MostrarMensagemReservaDeOutroUsuario = false;
+                        }
+                        else
+                        {
+                            Horario1.MostrarBotaoReservar = false;
+                            Horario1.MostrarBotaoRemoverReserva = false;
+                            Horario1.MostrarMensagemReservaDeOutroUsuario = true;
+                        }
+                        break;
+                    }
+                case 9:
+                    {
+
+                        if (reserva.UserId == idCurrentUser)
+                        {
+                            Horario2.reserva = reserva;
+                            Horario2.MostrarBotaoReservar = false;
+                            Horario2.MostrarBotaoRemoverReserva = true;
+                            Horario2.MostrarMensagemReservaDeOutroUsuario = false;
+                        }
+                        else
+                        {
+                            Horario2.MostrarBotaoReservar = false;
+                            Horario2.MostrarBotaoRemoverReserva = false;
+                            Horario2.MostrarMensagemReservaDeOutroUsuario = true;
+                        }
+                        break;
+                    }
+                case 11:
+                    {
+
+                        if (reserva.UserId == idCurrentUser)
+                        {
+                            Horario3.reserva = reserva;
+                            Horario3.MostrarBotaoReservar = false;
+                            Horario3.MostrarBotaoRemoverReserva = true;
+                            Horario3.MostrarMensagemReservaDeOutroUsuario = false;
+                        }
+                        else
+                        {
+                            Horario3.MostrarBotaoReservar = false;
+                            Horario3.MostrarBotaoRemoverReserva = false;
+                            Horario3.MostrarMensagemReservaDeOutroUsuario = true;
+                        }
+                        break;
+                    }
+                case 13:
+                    {
+
+                        if (reserva.UserId == idCurrentUser)
+                        {
+                            Horario4.reserva = reserva;
+                            Horario4.MostrarBotaoReservar = false;
+                            Horario4.MostrarBotaoRemoverReserva = true;
+                            Horario4.MostrarMensagemReservaDeOutroUsuario = false;
+                        }
+                        else
+                        {
+                            Horario4.MostrarBotaoReservar = false;
+                            Horario4.MostrarBotaoRemoverReserva = false;
+                            Horario4.MostrarMensagemReservaDeOutroUsuario = true;
+                        }
+                        break;
+                    }
+                case 15:
+                    {
+
+                        if (reserva.UserId == idCurrentUser)
+                        {
+                            Horario5.reserva = reserva;
+                            Horario5.MostrarBotaoReservar = false;
+                            Horario5.MostrarBotaoRemoverReserva = true;
+                            Horario5.MostrarMensagemReservaDeOutroUsuario = false;
+                        }
+                        else
+                        {
+                            Horario5.MostrarBotaoReservar = false;
+                            Horario5.MostrarBotaoRemoverReserva = false;
+                            Horario5.MostrarMensagemReservaDeOutroUsuario = true;
+                        }
+                        break;
+                    }
+                case 17:
+                    {
+
+                        if (reserva.UserId == idCurrentUser)
+                        {
+                            Horario6.reserva = reserva;
+                            Horario6.MostrarBotaoReservar = false;
+                            Horario6.MostrarBotaoRemoverReserva = true;
+                            Horario6.MostrarMensagemReservaDeOutroUsuario = false;
+                        }
+                        else
+                        {
+                            Horario6.MostrarBotaoReservar = false;
+                            Horario6.MostrarBotaoRemoverReserva = false;
+                            Horario6.MostrarMensagemReservaDeOutroUsuario = true;
+                        }
+                        break;
+                    }
+                default:
+                    {
+                        break;
+                    }
+            }
+        });
+
+    }
+
+    private async Task AdicionaReserva(PrepareReserva prepareReserva)
+    {
+
+        try
+        {
+
+            Reserva novaReserva = new();
+            novaReserva.DataInicio = prepareReserva.DataInicio;
+            novaReserva.DataFim = prepareReserva.DataFim;
+            novaReserva.SalaId = RoomShowReservations.Id;
+            novaReserva.UserId = ReservaSalaAuthenticationStateProvider.CurrentUser.Id;
+
+            await reservaSerice.AddReservaAsync(novaReserva);
+
+            await AtribuiHorarios(RoomShowReservations.Id);
+
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Erro ao tentar adicionar reserva {0}", ex);
+
+        }
+    }
+
+    private async Task RemoveReserva(PrepareReserva prepareReserva)
+    {
+        try
+        {
+
+            await reservaSerice.DeleteReservaAsync(prepareReserva.reserva);
+
+            await AtribuiHorarios(RoomShowReservations.Id);
+
+        }
+        catch (Exception ex)
+        {
+
+            Console.WriteLine("Erro ao tentar remover reserva {0}", ex);
+
+        }
+    }
+
+    private async Task AtualizaData()
+    {
+        await AtribuiHorarios(RoomShowReservations.Id);
+    }
+
+    private async Task GerarRelatorio(){
+        Console.WriteLine("Gerar relatório");
     }
 
     private async Task Logout()

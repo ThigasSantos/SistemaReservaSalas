@@ -5,5 +5,5 @@ public class Sala{
     public int Capacidade { get; set; }
     public string? Descricao { get; set; }
     public bool Ativo { get; set; }
-    public ICollection<Reserva>? Reservas { get; set; }
+    
 }

@@ -19,6 +19,11 @@ public class ReservaServices
         return await dbContext.Reserva.ToListAsync();
     }
 
+    public async Task<List<Reserva>> RetornaReservasAsyncByDateAndRoom(int roomId, DateTime diaBase){
+        
+        return await dbContext.Reserva.AsNoTracking().Where(res => res.SalaId == roomId && res.DataInicio.DayOfYear == diaBase.DayOfYear && res.DataInicio.Year == diaBase.Year).ToListAsync();
+    }
+
     public async Task<Reserva> AddReservaAsync(Reserva reserva)
     {
         try
@@ -53,10 +58,13 @@ public class ReservaServices
 
     public async Task DeleteReservaAsync(Reserva reserva)
     {
+
+        Console.WriteLine("chegou aqui");
         try
         {
+            
             dbContext.Reserva.Remove(reserva);
-            await dbContext.SaveChangesAsync();
+            dbContext.SaveChanges();
         }
         catch (Exception)
         {

@@ -4,7 +4,6 @@ namespace SistemaReservaSalas.Data;
 public class SistemaDbContext : DbContext{
     #region Construtor
     public SistemaDbContext(DbContextOptions<SistemaDbContext> options): base(options){
-
     }
     #endregion
 

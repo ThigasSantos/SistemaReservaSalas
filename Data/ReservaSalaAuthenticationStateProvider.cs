@@ -58,6 +58,13 @@ public class ReservaSalaAuthenticationStateProvider : AuthenticationStateProvide
         var authenticationState = await task;
         if (authenticationState is not null)
         {
+            Console.WriteLine("OnAuthentication");
+            Console.WriteLine("{0}", authenticationState.User);
+        Console.WriteLine("{0}",authenticationState.User.FindFirstValue(ClaimTypes.Sid));
+        Console.WriteLine("{0}",authenticationState.User.FindFirstValue(ClaimTypes.Name));
+        Console.WriteLine("{0}",authenticationState.User.FindFirstValue(ClaimTypes.Email));
+        Console.WriteLine("{0}",authenticationState.User.FindFirstValue(ClaimTypes.Expired));
+        Console.WriteLine("{0}",authenticationState.User.FindFirstValue(ClaimTypes.Hash));
             CurrentUser = User.FromClaimsPrincipal(authenticationState.User);
         }
     }

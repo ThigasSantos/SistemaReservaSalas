@@ -19,6 +19,11 @@ public class SalaServices
         return await dbContext.Sala.ToListAsync();
     }
 
+    public async Task<Sala> RetornaSalaByIdAsync(int id)
+    {
+        return await dbContext.Sala.FindAsync(id);
+    }
+
     public async Task<Sala> AddRoomAsync(Sala sala)
     {
         try

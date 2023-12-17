@@ -8,7 +8,8 @@
 
 
 
-<body class="login-body">
+
+    <div class="login-body">
     <div class="login-container">
         <h3 class="login-title">Login</h3>
         <input class="input-login-email" type="email" id="email" @bind-value="@email" />
@@ -16,7 +17,8 @@
         <button class="button-login" @onclick="LoginAsync">Login</button>
         <button class="button-cadastro" @onclick="GoToCadastro">Cadastrar</button>
     </div>
-</body>
+    </div>
+
 
 @code {
     private User user = new User();
