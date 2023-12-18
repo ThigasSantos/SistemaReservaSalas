@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "2TdNKxkOWBD+rWUdcqbhZ7FJ2jTY+PMHW8rPolzwGcs=",
+  "Hash": "qUGdM0K8hGBXgo/1vzaQF6FqUHugMMRv0OAIh1OU8KA=",
   "Source": "SistemaReservaSalas",
   "BasePath": "_content/SistemaReservaSalas",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "SistemaReservaSalas\\wwwroot",
       "Source": "SistemaReservaSalas",
-      "ContentRoot": "C:\\Users\\enio1\\Documents\\dotnet\\SistemaReservaSalas\\wwwroot\\",
+      "ContentRoot": "E:\\Faculdade\\.NET\\SistemaReservaSalas\\wwwroot\\",
       "BasePath": "_content/SistemaReservaSalas",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\enio1\\Documents\\dotnet\\SistemaReservaSalas\\obj\\Debug\\net7.0\\scopedcss\\bundle\\SistemaReservaSalas.styles.css",
+      "Identity": "E:\\Faculdade\\.NET\\SistemaReservaSalas\\obj\\Debug\\net7.0\\scopedcss\\bundle\\SistemaReservaSalas.styles.css",
       "SourceId": "SistemaReservaSalas",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\enio1\\Documents\\dotnet\\SistemaReservaSalas\\obj\\Debug\\net7.0\\scopedcss\\bundle\\",
+      "ContentRoot": "E:\\Faculdade\\.NET\\SistemaReservaSalas\\obj\\Debug\\net7.0\\scopedcss\\bundle\\",
       "BasePath": "_content/SistemaReservaSalas",
       "RelativePath": "SistemaReservaSalas.styles.css",
       "AssetKind": "All",
@@ -31,13 +31,13 @@
       "AssetTraitValue": "ApplicationBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\enio1\\Documents\\dotnet\\SistemaReservaSalas\\obj\\Debug\\net7.0\\scopedcss\\bundle\\SistemaReservaSalas.styles.css"
+      "OriginalItemSpec": "E:\\Faculdade\\.NET\\SistemaReservaSalas\\obj\\Debug\\net7.0\\scopedcss\\bundle\\SistemaReservaSalas.styles.css"
     },
     {
-      "Identity": "C:\\Users\\enio1\\Documents\\dotnet\\SistemaReservaSalas\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\SistemaReservaSalas.bundle.scp.css",
+      "Identity": "E:\\Faculdade\\.NET\\SistemaReservaSalas\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\SistemaReservaSalas.bundle.scp.css",
       "SourceId": "SistemaReservaSalas",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\enio1\\Documents\\dotnet\\SistemaReservaSalas\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\",
+      "ContentRoot": "E:\\Faculdade\\.NET\\SistemaReservaSalas\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\",
       "BasePath": "_content/SistemaReservaSalas",
       "RelativePath": "SistemaReservaSalas.bundle.scp.css",
       "AssetKind": "All",
@@ -48,13 +48,13 @@
       "AssetTraitValue": "ProjectBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\enio1\\Documents\\dotnet\\SistemaReservaSalas\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\SistemaReservaSalas.bundle.scp.css"
+      "OriginalItemSpec": "E:\\Faculdade\\.NET\\SistemaReservaSalas\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\SistemaReservaSalas.bundle.scp.css"
     },
     {
-      "Identity": "C:\\Users\\enio1\\Documents\\dotnet\\SistemaReservaSalas\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "Identity": "E:\\Faculdade\\.NET\\SistemaReservaSalas\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
       "SourceId": "SistemaReservaSalas",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\enio1\\Documents\\dotnet\\SistemaReservaSalas\\wwwroot\\",
+      "ContentRoot": "E:\\Faculdade\\.NET\\SistemaReservaSalas\\wwwroot\\",
       "BasePath": "_content/SistemaReservaSalas",
       "RelativePath": "css/bootstrap/bootstrap.min.css",
       "AssetKind": "All",
@@ -68,10 +68,10 @@
       "OriginalItemSpec": "wwwroot\\css\\bootstrap\\bootstrap.min.css"
     },
     {
-      "Identity": "C:\\Users\\enio1\\Documents\\dotnet\\SistemaReservaSalas\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "Identity": "E:\\Faculdade\\.NET\\SistemaReservaSalas\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
       "SourceId": "SistemaReservaSalas",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\enio1\\Documents\\dotnet\\SistemaReservaSalas\\wwwroot\\",
+      "ContentRoot": "E:\\Faculdade\\.NET\\SistemaReservaSalas\\wwwroot\\",
       "BasePath": "_content/SistemaReservaSalas",
       "RelativePath": "css/bootstrap/bootstrap.min.css.map",
       "AssetKind": "All",
@@ -85,10 +85,10 @@
       "OriginalItemSpec": "wwwroot\\css\\bootstrap\\bootstrap.min.css.map"
     },
     {
-      "Identity": "C:\\Users\\enio1\\Documents\\dotnet\\SistemaReservaSalas\\wwwroot\\css\\open-iconic\\FONT-LICENSE",
+      "Identity": "E:\\Faculdade\\.NET\\SistemaReservaSalas\\wwwroot\\css\\open-iconic\\FONT-LICENSE",
       "SourceId": "SistemaReservaSalas",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\enio1\\Documents\\dotnet\\SistemaReservaSalas\\wwwroot\\",
+      "ContentRoot": "E:\\Faculdade\\.NET\\SistemaReservaSalas\\wwwroot\\",
       "BasePath": "_content/SistemaReservaSalas",
       "RelativePath": "css/open-iconic/FONT-LICENSE",
       "AssetKind": "All",
@@ -102,10 +102,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\FONT-LICENSE"
     },
     {
-      "Identity": "C:\\Users\\enio1\\Documents\\dotnet\\SistemaReservaSalas\\wwwroot\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css",
+      "Identity": "E:\\Faculdade\\.NET\\SistemaReservaSalas\\wwwroot\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css",
       "SourceId": "SistemaReservaSalas",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\enio1\\Documents\\dotnet\\SistemaReservaSalas\\wwwroot\\",
+      "ContentRoot": "E:\\Faculdade\\.NET\\SistemaReservaSalas\\wwwroot\\",
       "BasePath": "_content/SistemaReservaSalas",
       "RelativePath": "css/open-iconic/font/css/open-iconic-bootstrap.min.css",
       "AssetKind": "All",
@@ -119,10 +119,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css"
     },
     {
-      "Identity": "C:\\Users\\enio1\\Documents\\dotnet\\SistemaReservaSalas\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.eot",
+      "Identity": "E:\\Faculdade\\.NET\\SistemaReservaSalas\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.eot",
       "SourceId": "SistemaReservaSalas",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\enio1\\Documents\\dotnet\\SistemaReservaSalas\\wwwroot\\",
+      "ContentRoot": "E:\\Faculdade\\.NET\\SistemaReservaSalas\\wwwroot\\",
       "BasePath": "_content/SistemaReservaSalas",
       "RelativePath": "css/open-iconic/font/fonts/open-iconic.eot",
       "AssetKind": "All",
@@ -136,10 +136,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.eot"
     },
     {
-      "Identity": "C:\\Users\\enio1\\Documents\\dotnet\\SistemaReservaSalas\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.otf",
+      "Identity": "E:\\Faculdade\\.NET\\SistemaReservaSalas\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.otf",
       "SourceId": "SistemaReservaSalas",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\enio1\\Documents\\dotnet\\SistemaReservaSalas\\wwwroot\\",
+      "ContentRoot": "E:\\Faculdade\\.NET\\SistemaReservaSalas\\wwwroot\\",
       "BasePath": "_content/SistemaReservaSalas",
       "RelativePath": "css/open-iconic/font/fonts/open-iconic.otf",
       "AssetKind": "All",
@@ -153,10 +153,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.otf"
     },
     {
-      "Identity": "C:\\Users\\enio1\\Documents\\dotnet\\SistemaReservaSalas\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.svg",
+      "Identity": "E:\\Faculdade\\.NET\\SistemaReservaSalas\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.svg",
       "SourceId": "SistemaReservaSalas",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\enio1\\Documents\\dotnet\\SistemaReservaSalas\\wwwroot\\",
+      "ContentRoot": "E:\\Faculdade\\.NET\\SistemaReservaSalas\\wwwroot\\",
       "BasePath": "_content/SistemaReservaSalas",
       "RelativePath": "css/open-iconic/font/fonts/open-iconic.svg",
       "AssetKind": "All",
@@ -170,10 +170,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.svg"
     },
     {
-      "Identity": "C:\\Users\\enio1\\Documents\\dotnet\\SistemaReservaSalas\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.ttf",
+      "Identity": "E:\\Faculdade\\.NET\\SistemaReservaSalas\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.ttf",
       "SourceId": "SistemaReservaSalas",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\enio1\\Documents\\dotnet\\SistemaReservaSalas\\wwwroot\\",
+      "ContentRoot": "E:\\Faculdade\\.NET\\SistemaReservaSalas\\wwwroot\\",
       "BasePath": "_content/SistemaReservaSalas",
       "RelativePath": "css/open-iconic/font/fonts/open-iconic.ttf",
       "AssetKind": "All",
@@ -187,10 +187,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.ttf"
     },
     {
-      "Identity": "C:\\Users\\enio1\\Documents\\dotnet\\SistemaReservaSalas\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.woff",
+      "Identity": "E:\\Faculdade\\.NET\\SistemaReservaSalas\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.woff",
       "SourceId": "SistemaReservaSalas",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\enio1\\Documents\\dotnet\\SistemaReservaSalas\\wwwroot\\",
+      "ContentRoot": "E:\\Faculdade\\.NET\\SistemaReservaSalas\\wwwroot\\",
       "BasePath": "_content/SistemaReservaSalas",
       "RelativePath": "css/open-iconic/font/fonts/open-iconic.woff",
       "AssetKind": "All",
@@ -204,10 +204,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.woff"
     },
     {
-      "Identity": "C:\\Users\\enio1\\Documents\\dotnet\\SistemaReservaSalas\\wwwroot\\css\\open-iconic\\ICON-LICENSE",
+      "Identity": "E:\\Faculdade\\.NET\\SistemaReservaSalas\\wwwroot\\css\\open-iconic\\ICON-LICENSE",
       "SourceId": "SistemaReservaSalas",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\enio1\\Documents\\dotnet\\SistemaReservaSalas\\wwwroot\\",
+      "ContentRoot": "E:\\Faculdade\\.NET\\SistemaReservaSalas\\wwwroot\\",
       "BasePath": "_content/SistemaReservaSalas",
       "RelativePath": "css/open-iconic/ICON-LICENSE",
       "AssetKind": "All",
@@ -221,10 +221,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\ICON-LICENSE"
     },
     {
-      "Identity": "C:\\Users\\enio1\\Documents\\dotnet\\SistemaReservaSalas\\wwwroot\\css\\open-iconic\\README.md",
+      "Identity": "E:\\Faculdade\\.NET\\SistemaReservaSalas\\wwwroot\\css\\open-iconic\\README.md",
       "SourceId": "SistemaReservaSalas",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\enio1\\Documents\\dotnet\\SistemaReservaSalas\\wwwroot\\",
+      "ContentRoot": "E:\\Faculdade\\.NET\\SistemaReservaSalas\\wwwroot\\",
       "BasePath": "_content/SistemaReservaSalas",
       "RelativePath": "css/open-iconic/README.md",
       "AssetKind": "All",
@@ -238,10 +238,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\README.md"
     },
     {
-      "Identity": "C:\\Users\\enio1\\Documents\\dotnet\\SistemaReservaSalas\\wwwroot\\css\\site.css",
+      "Identity": "E:\\Faculdade\\.NET\\SistemaReservaSalas\\wwwroot\\css\\site.css",
       "SourceId": "SistemaReservaSalas",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\enio1\\Documents\\dotnet\\SistemaReservaSalas\\wwwroot\\",
+      "ContentRoot": "E:\\Faculdade\\.NET\\SistemaReservaSalas\\wwwroot\\",
       "BasePath": "_content/SistemaReservaSalas",
       "RelativePath": "css/site.css",
       "AssetKind": "All",
@@ -255,10 +255,10 @@
       "OriginalItemSpec": "wwwroot\\css\\site.css"
     },
     {
-      "Identity": "C:\\Users\\enio1\\Documents\\dotnet\\SistemaReservaSalas\\wwwroot\\favicon.png",
+      "Identity": "E:\\Faculdade\\.NET\\SistemaReservaSalas\\wwwroot\\favicon.png",
       "SourceId": "SistemaReservaSalas",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\enio1\\Documents\\dotnet\\SistemaReservaSalas\\wwwroot\\",
+      "ContentRoot": "E:\\Faculdade\\.NET\\SistemaReservaSalas\\wwwroot\\",
       "BasePath": "_content/SistemaReservaSalas",
       "RelativePath": "favicon.png",
       "AssetKind": "All",
@@ -272,10 +272,10 @@
       "OriginalItemSpec": "wwwroot\\favicon.png"
     },
     {
-      "Identity": "C:\\Users\\enio1\\Documents\\dotnet\\SistemaReservaSalas\\wwwroot\\js\\PDFGenerate.js",
+      "Identity": "E:\\Faculdade\\.NET\\SistemaReservaSalas\\wwwroot\\js\\PDFGenerate.js",
       "SourceId": "SistemaReservaSalas",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\enio1\\Documents\\dotnet\\SistemaReservaSalas\\wwwroot\\",
+      "ContentRoot": "E:\\Faculdade\\.NET\\SistemaReservaSalas\\wwwroot\\",
       "BasePath": "_content/SistemaReservaSalas",
       "RelativePath": "js/PDFGenerate.js",
       "AssetKind": "All",

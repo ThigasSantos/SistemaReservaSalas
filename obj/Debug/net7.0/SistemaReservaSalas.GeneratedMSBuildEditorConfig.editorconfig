@@ -9,45 +9,49 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = SistemaReservaSalas
 build_property.RootNamespace = SistemaReservaSalas
-build_property.ProjectDir = C:\Users\enio1\Documents\dotnet\SistemaReservaSalas\
+build_property.ProjectDir = E:\Faculdade\.NET\SistemaReservaSalas\
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\enio1\Documents\dotnet\SistemaReservaSalas
+build_property.MSBuildProjectDirectory = E:\Faculdade\.NET\SistemaReservaSalas
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/enio1/Documents/dotnet/SistemaReservaSalas/App.razor]
+[E:/Faculdade/.NET/SistemaReservaSalas/App.razor]
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/enio1/Documents/dotnet/SistemaReservaSalas/Pages/Cadastro.razor]
+[E:/Faculdade/.NET/SistemaReservaSalas/Pages/About.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWJvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Faculdade/.NET/SistemaReservaSalas/Pages/Cadastro.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2FkYXN0cm8ucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/enio1/Documents/dotnet/SistemaReservaSalas/Pages/FetchData.razor]
+[E:/Faculdade/.NET/SistemaReservaSalas/Pages/FetchData.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmV0Y2hEYXRhLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/enio1/Documents/dotnet/SistemaReservaSalas/Pages/Index.razor]
+[E:/Faculdade/.NET/SistemaReservaSalas/Pages/Index.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/enio1/Documents/dotnet/SistemaReservaSalas/Pages/Login.razor]
+[E:/Faculdade/.NET/SistemaReservaSalas/Pages/Login.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9naW4ucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/enio1/Documents/dotnet/SistemaReservaSalas/_Imports.razor]
+[E:/Faculdade/.NET/SistemaReservaSalas/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/enio1/Documents/dotnet/SistemaReservaSalas/Shared/MainLayout.razor]
+[E:/Faculdade/.NET/SistemaReservaSalas/Shared/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-8s9gpqhvwk
 
-[C:/Users/enio1/Documents/dotnet/SistemaReservaSalas/Pages/Error.cshtml]
+[E:/Faculdade/.NET/SistemaReservaSalas/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/enio1/Documents/dotnet/SistemaReservaSalas/Pages/_Host.cshtml]
+[E:/Faculdade/.NET/SistemaReservaSalas/Pages/_Host.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0hvc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
