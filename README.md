@@ -30,7 +30,7 @@ O Sistema de Reservas de Salas é uma aplicação web que permite aos usuários 
 
 1. Clone o repositório para a sua máquina local.
    ```bash
-   git clone https://github.com/seu-usuario/sistema-reservas-salas.git
+   git clone https://github.com/ThigasSantos/sistema-reservas-salas.git
    
 2. Abra o projeto utilizando o Visual Studio ou Visual Studio Code.
 
@@ -48,7 +48,7 @@ O Sistema de Reservas de Salas é uma aplicação web que permite aos usuários 
    ```
    dotnet run
 
-10. Acesse a aplicação no navegador: https://localhost:"PORT"
+10. Acesse a aplicação no navegador: https://localhost:'PORT'
 
 ## Licença
 
